@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vue基本</title>
+    <script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<style>
+
+</style>
+<body>
+
+<div id="app">
+    <div v-for="(info,idx) in list11.parents"  :class="idx+click+idx">
+        <div @click="show('click',idx)">{{info.name}}</div>
+        <div v-if="info.userChildren.parents" v-for="info2 in info.userChildren.parents">
+            {{info2.name}}
+            <!--再套一层-->
+            <div @click="tt">111111</div>
+        </div>
+        <div v-if="info.userChildren.user" v-for="info3 in info.userChildren.user">
+            <input type="checkbox">{{info3.userName}}
+        </div>
+    </div>
+
+    <div v-for="info1 in list11.user">
+        <input type="checkbox">{{info1.userName}}
+    </div>
+</div>
+
+
+
+
+
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            message:'hello',
+            list11:{
+                parents:[
+                    {
+                        name:'1',
+                        count:0,
+                        userChildren:{
+
+                        }
+                    },
+                    {
+                        name:'2',
+                        count:0,
+                        userChildren:{}
+                    }
+                ],
+                user:[
+                    {
+                        userName:'slj1'
+                    },
+                    {
+                        userName:'slj2'
+                    }
+                ],
+
+            },
+            list2:{
+                parents:[
+                    {
+                        name:'3'
+                    },
+                    {
+                        name:'4'
+                    }
+                ],
+                user:[
+                    {
+                        userName:'slj3'
+                    },
+                    {
+                        userName:'slj4'
+                    }
+                ]
+            },
+            list3:{
+
+
+            },
+            click:'click'
+        },
+        created:function () {
+
+
+            console.log('11111')
+        },
+        mounted:function () {
+
+            console.log('2222')
+        },
+        methods:{
+            show:function (name,idx) {
+//                this.list1.parents[idx].count++;
+//                if(this.list1.parents[idx].count%2 !=0){
+//                    $('.'+idx+name+idx+'>'+ '.inner').remove();
+//                    let html = ''
+//                    for(let i in this.list2.parents){
+//                        html += '<div class="inner" @click="tt">'+this.list2.parents[i].name+'</div>'
+//                    }
+//                    $('.'+idx+name+idx+'').append(html)
+//                }else{
+//                    $('.'+idx+name+idx+'>'+ '.inner').remove();
+//                }
+//                console.log(name);
+//                console.log(idx);
+                this.list11.parents[idx].count++;
+                if(this.list11.parents[idx].count%2 !=0){
+                    this.list11.parents[idx].userChildren = this.list2
+                }else{
+                    this.list11.parents[idx].userChildren = {}
+                }
+
+                console.log(111)
+                this.$forceUpdate()
+//                this.list3 = this.list2;
+                let arr = [1,2,3,4]
+                for(let i in arr){
+                    console.log(i)
+                }
+
+
+            },
+            tt:function () {
+                console.log(333)
+            }
+        }
+
+    })
+
+</script>
+</body>
+</html>

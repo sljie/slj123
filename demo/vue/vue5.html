@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vue局部组件</title>
+    <script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+</head>
+<body>
+
+<div id="app" >
+    <!--可以使组件仅在另一个实例/组件的作用域中可用：-->
+    <!--header-bar自定义组件 :title获得父组件传过来的字段，  @to-name自定义事件将子组件的数据传给父组件-->
+    <header-bar :title="titleName" @to-name="receiveData"></header-bar>
+    <p>{{test}}</p>
+</div>
+
+
+
+
+
+<script>
+    //声明局部组件
+    var header1 = {
+        template:'<div><div @click="toName">{{title}}</div></div>',
+        //子组件只能使用data返回方法的写法
+        data:function(){
+            return{
+                name:'slj'
+            }
+        },
+        //子组件通过props接收父组件的值
+        props:['title'],
+        methods:{
+            toName:function () {
+                this.$emit('to-name',this.name)
+            }
+        }
+    }
+    var vm = new Vue({
+        el:'#app',
+        //两种写法都可以
+//        data:{
+//            test:'11',
+//            titleName:'我是头部'
+//        },
+
+        data:function () {
+            return{
+                test:'11',
+                titleName:'tou'
+            }
+        },
+        components:{'header-bar':header1},
+        methods:{
+            //父组件通过方法接收子组件的值
+            receiveData:function (item) {
+                console.log(item)
+            }
+        }
+    })
+
+</script>
+</body>
+</html>

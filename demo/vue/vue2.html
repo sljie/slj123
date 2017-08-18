@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vue基本</title>
+    <script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+    <style>
+        #app{
+            width:100px;
+            height:100px;
+            cursor: pointer;
+        }
+        .red{
+            background: red;
+        }
+        .green{
+            background: green;
+        }
+    </style>
+</head>
+<body>
+<!--:class绑定样式 如果src，disabled等属性需要引入vue中所定义的变量都需要v-bind： （：）简写-->
+<!--:class中使用三目运算如果isRed===true 样式绑定为red，反之 ''；isGreen同理-->
+<!--@click是v-on：click的简写绑定事件，方法在motheds中定义-->
+<div id="app" :class="[isRed===true?'red':'',isGreen===true?'green':'']" @click="change">
+
+</div>
+
+
+
+
+
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            isRed:true,
+            isGreen:false
+        },
+        methods:{
+            change:function () {
+                let _self = this;
+                _self.isRed = !_self.isRed;
+                _self.isGreen = !_self.isGreen;
+            }
+        }
+    })
+
+</script>
+</body>
+</html>

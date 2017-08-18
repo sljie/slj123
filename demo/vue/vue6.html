@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vue局部组件</title>
+    <script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+    <style>
+        .red{
+            background: red;
+        }
+        .green{
+            background: green;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app" >
+    <div v-for="(info,index) in listInfo" >
+        <!--根据数组索引删除数据时可以加一个input并且绑定关键词删除的时候不会出问题-->
+        <input type="text" v-model="info.age">{{info.name}}------{{info.age}}
+        <span @click="deleteOne(index)" :class="['red',isGreen===true?'green':'']">chachacha</span>
+    </div>
+    <!--v-for遍历对象-->
+    <div v-for="(value,key,index) in obj">
+        {{value}}--{{key}}--{{index}}
+    </div>
+</div>
+
+
+
+
+
+<script>
+
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            listInfo:[
+                {
+                    name:'slj',
+                    age:''
+                },
+                {
+                    name:'slj2',
+                    age:''
+                },
+                {
+                    name:'slj3',
+                    age:''
+                },
+                {
+                    name:'slj4',
+                    age:''
+                },
+                {
+                    name:'slj5',
+                    age:''
+                },
+                {
+                    name:'slj6',
+                    age:''
+                },
+                {
+                    name:'slj7',
+                    age:''
+                }
+            ],
+            isGreen:false,
+            obj:{
+                name:'slj',
+                age:'11',
+                sex:'1'
+            }
+        },
+        mounted:function () {
+            this.listInfo.push({
+                name:'slj8',
+                age:''
+            })
+//            this.isGreen = true
+        },
+        methods:{
+            deleteOne:function(i){
+                this.listInfo.splice(i,1)
+                this.isGreen = true
+            }
+        }
+    })
+
+</script>
+</body>
+</html>

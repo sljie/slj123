@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vue基本</title>
+    <script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <!--数据循环v-for，循环数组  info自定义变量名，index遍历数组的索引   info就是data数据中的每一个对象-->
+    <div v-for="(info,index) in listInfo">
+        <div>{{info.name}}--{{info.age}}</div>
+        <div>性别：{{info.sex}}</div>
+    </div>
+</div>
+
+
+
+
+
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            listInfo:[
+                {
+                    name:'s',
+                    age:'1'
+                },
+                {
+                    name:'l',
+                    age:'2'
+                }
+            ]
+        },
+        mounted:function () {
+            let _self = this;
+            //增加数组对象中的字段
+            for(let i in _self.listInfo){
+                _self.listInfo[i].sex = '1'
+            }
+            //强制刷新页面，初始化方法中给已有对象增加字段，必须加下面的方法，否则增加字段渲染不到页面中
+            _self.$forceUpdate()
+        }
+    })
+
+</script>
+</body>
+</html>

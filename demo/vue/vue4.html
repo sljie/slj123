@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vue基本</title>
+    <script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <!--v-if是将这个标签移除掉，通过f12检索的时候看不到，而将字段变为true时会将此标签重新载入-->
+    <div v-if="isShowName">{{name}}</div>
+    <!--v-show是将当前标签的display设置为none 通过f12检索能够看到这个标签-->
+    <div v-show="isShowAge">{{age}}</div>
+</div>
+
+
+
+
+
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            name:'slj',
+            age:'18',
+            isShowName:true,
+            isShowAge:false
+        }
+    })
+
+</script>
+</body>
+</html>
